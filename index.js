@@ -6,6 +6,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Usar variables de entorno para la nube
 const db = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -19,7 +20,7 @@ db.connect(err => {
         console.error('Error de conexión a la DB:', err);
         return;
     }
-    console.log('Nexora conectada a la nube de Railway');
+    console.log('Conexión exitosa a MariaDB en Railway');
 });
 
 app.get('/api/books', (req, res) => {
