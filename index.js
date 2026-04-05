@@ -7,10 +7,19 @@ app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'robles',
-    password: '4268', 
-    database: 'nexora_db'
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    port: process.env.DB_PORT || 3306
+});
+
+db.connect(err => {
+    if (err) {
+        console.error('Error de conexión a la DB:', err);
+        return;
+    }
+    console.log('Nexora conectada a la nube de Railway');
 });
 
 app.get('/api/books', (req, res) => {
@@ -20,4 +29,5 @@ app.get('/api/books', (req, res) => {
     });
 });
 
-app.listen(5000, () => console.log('Backend en http://localhost:5000'));
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Servidor Nexora en puerto ${PORT}`));
