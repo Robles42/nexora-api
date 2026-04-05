@@ -6,7 +6,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Usar variables de entorno para la nube
+// Usar variables de entorno de la nube
 const db = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -20,7 +20,7 @@ db.connect(err => {
         console.error('Error de conexión a la DB:', err);
         return;
     }
-    console.log('Conexión exitosa a MariaDB en Railway');
+    console.log('Nexora conectada a la nube de Railway');
 });
 
 app.get('/api/books', (req, res) => {
@@ -31,4 +31,4 @@ app.get('/api/books', (req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Servidor Nexora en puerto ${PORT}`));
+app.listen(PORT, () => console.log(`Backend en puerto ${PORT}`));
